@@ -22,6 +22,7 @@ type MemoryAccount struct {
 
 	AuthenticatedLengthExperiment bool
 	NoTerminationSignal           bool
+	Status                        string
 }
 
 // AnyValidID returns an ID that is either the main ID or one of the alternative IDs if any.
@@ -62,5 +63,6 @@ func (a *Account) AsAccount() (protocol.Account, error) {
 		Security:                      a.SecuritySettings.GetSecurityType(),
 		AuthenticatedLengthExperiment: AuthenticatedLength,
 		NoTerminationSignal:           NoTerminationSignal,
+		Status:                        a.Status,
 	}, nil
 }

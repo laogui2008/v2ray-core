@@ -19,6 +19,7 @@ type VMessAccount struct {
 	AlterIds    uint16 `json:"alterId"`
 	Security    string `json:"security"`
 	Experiments string `json:"experiments"`
+	Status      string `json:"Status"`
 }
 
 // Build implements Buildable
@@ -45,6 +46,7 @@ func (a *VMessAccount) Build() *vmess.Account {
 			Type: st,
 		},
 		TestsEnabled: a.Experiments,
+		Status:       a.Status,
 	}
 }
 

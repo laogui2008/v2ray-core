@@ -170,6 +170,11 @@ func (v *TimedUserValidator) Get(userHash []byte) (*protocol.MemoryUser, protoco
 	pair, found := v.userHash[fixedSizeHash]
 	if found {
 		user := pair.user.user
+		vmessAccount := user.Account.(*MemoryAccount)
+		// account status: 0-disable, 1-enable
+		if vmessAccount.Status == "0" {
+			return nil, 0, false, ErrDisableAccount
+		}
 		if atomic.LoadUint32(pair.taintedFuse) == 0 {
 			return &user, protocol.Timestamp(pair.timeInc) + v.baseTime, true, nil
 		}
@@ -268,3 +273,5 @@ func (v *TimedUserValidator) ShouldShowLegacyWarn() bool {
 var ErrNotFound = newError("Not Found")
 
 var ErrTainted = newError("ErrTainted")
+
+var ErrDisableAccount = newError("Disable Account")

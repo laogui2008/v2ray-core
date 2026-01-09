@@ -26,7 +26,9 @@ type Account struct {
 	// Security settings. Only applies to client side.
 	SecuritySettings *protocol.SecurityConfig `protobuf:"bytes,3,opt,name=security_settings,json=securitySettings,proto3" json:"security_settings,omitempty"`
 	// Define tests enabled for this account
-	TestsEnabled  string `protobuf:"bytes,4,opt,name=tests_enabled,json=testsEnabled,proto3" json:"tests_enabled,omitempty"`
+	TestsEnabled string `protobuf:"bytes,4,opt,name=tests_enabled,json=testsEnabled,proto3" json:"tests_enabled,omitempty"`
+	// account status: 0-disable, 1-enable
+	Status        string `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -89,16 +91,24 @@ func (x *Account) GetTestsEnabled() string {
 	return ""
 }
 
+func (x *Account) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
 var File_proxy_vmess_account_proto protoreflect.FileDescriptor
 
 const file_proxy_vmess_account_proto_rawDesc = "" +
 	"\n" +
-	"\x19proxy/vmess/account.proto\x12\x16v2ray.core.proxy.vmess\x1a\x1dcommon/protocol/headers.proto\"\xb2\x01\n" +
+	"\x19proxy/vmess/account.proto\x12\x16v2ray.core.proxy.vmess\x1a\x1dcommon/protocol/headers.proto\"\xca\x01\n" +
 	"\aAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\balter_id\x18\x02 \x01(\rR\aalterId\x12W\n" +
 	"\x11security_settings\x18\x03 \x01(\v2*.v2ray.core.common.protocol.SecurityConfigR\x10securitySettings\x12#\n" +
-	"\rtests_enabled\x18\x04 \x01(\tR\ftestsEnabledBc\n" +
+	"\rtests_enabled\x18\x04 \x01(\tR\ftestsEnabled\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\tR\x06statusBc\n" +
 	"\x1acom.v2ray.core.proxy.vmessP\x01Z*github.com/v2fly/v2ray-core/v5/proxy/vmess\xaa\x02\x16V2Ray.Core.Proxy.Vmessb\x06proto3"
 
 var (

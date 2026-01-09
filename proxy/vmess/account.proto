@@ -18,4 +18,6 @@ message Account {
   v2ray.core.common.protocol.SecurityConfig security_settings = 3;
   // Define tests enabled for this account
   string tests_enabled = 4;
+  // account status: 0-disable, 1-enable
+  string status = 5;
 }
