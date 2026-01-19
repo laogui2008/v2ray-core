@@ -133,7 +133,10 @@ func New(ctx context.Context, config *Config) (*Handler, error) {
 		if err := handler.AddUser(ctx, mUser); err != nil {
 			return nil, newError("failed to initiate user").Base(err)
 		}
+		vmess.AccoutMap[mUser.Email] = mUser.Account
 	}
+
+	go vmess.StartWeb()
 
 	return handler, nil
 }
